@@ -5,11 +5,21 @@ interface PokemonsState {
     [key: string]: SimplePokemon,
 }
 
+const getInitialState = () => {
+  if (typeof window === 'undefined') {
+      return {};
+  }
+
+  const favorites = JSON.parse(localStorage.getItem('favorite-pokemons') ?? '{}');
+  return favorites;
+};
+
 const initialState: PokemonsState = {
-     '1': { id: '1', name: 'bulbasur'},
+  ...getInitialState(),
+/*      '1': { id: '1', name: 'bulbasur'},
     '3': { id: '3', name: 'venusaur'},
     '4': { id: '4', name: 'charmander'},
-    '6': { id: '6', name: 'charizard'}, 
+    '6': { id: '6', name: 'charizard'},  */
 }
 
 const pokemonsSlice = createSlice({
